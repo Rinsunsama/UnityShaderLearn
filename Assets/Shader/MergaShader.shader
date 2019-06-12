@@ -1,4 +1,4 @@
-﻿Shader "__MyShader__/SimpleShader" {
+﻿Shader "__MyShader__/MergaShader" {
 	Properties
 	{
 		_TintColor("Color",Color) = (1,1,1,1)
@@ -58,8 +58,7 @@
 				//return _TintColor;
 				float4 mainColor = tex2D(_MainTexture,IN.uv0);
 				float4 subColor = tex2D(_SecondTexture,IN.uv0);
-				clip(subColor.rgb - _Blend_Amount);				//剔除
-				return mainColor;
+				return lerp(mainColor,subColor,_Blend_Amount);
 			}
 
 			ENDCG

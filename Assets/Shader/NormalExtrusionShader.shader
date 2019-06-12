@@ -1,11 +1,10 @@
-﻿Shader "__MyShader__/SimpleShader" {
+﻿Shader "__MyShader__/NormalExtrusionShader" {
 	Properties
 	{
 		_TintColor("Color",Color) = (1,1,1,1)
 		[Header(Color Ramp Sample)]
 		[NoScaleOffset]_MainTexture("MainTexture",2D) = "grey"{}
-		_SecondTexture("SecondTexture",2D) = "grey"{}
-		_Blend_Amount("_Blend_Amount",Range(0,1)) = 0
+		_Extrusion_Amount("Extrusion Amount",Range(-10,10)) = 0
 	}
 	SubShader
 	{
@@ -28,38 +27,36 @@
 			{
 				float4 vertex : POSITION;
 				float2 uv0 : TEXCOORD1;
-			//	float2 uv1 : TEXCOORD0;
+				float3 normal : NORMAL;
 			};
 
 			//step 3
 			struct v2f{
-				float4 position : SV_POSITION;
+				float4 vertex : SV_POSITION;
 				float2 uv0 : TEXCOORD1;
-			//	float2 uv1 : TEXCOORD0;
+				float3 color: COLOR;
 			};
 
 			float4 _TintColor;
 			sampler2D _MainTexture;
-			sampler2D _SecondTexture;
-			float _Blend_Amount;
+			float _Extrusion_Amount;
 
 			v2f vert(appdata IN)
 			{
 				v2f OUT;
-				//IN.vertex.xyz *= sin(_Time.y * _Modifier)/2 + 0.5f;
-				OUT.position = UnityObjectToClipPos(IN.vertex);
+				IN.vertex.z += IN.normal.z*_Extrusion_Amount;
+				OUT.vertex = UnityObjectToClipPos(IN.vertex);
+
 				OUT.uv0 = IN.uv0;
+				OUT.color = normalize(IN.normal);
 				return OUT;
 			}
 
 			fixed4 frag(v2f IN) : SV_Target
 			{
-				
 				//return _TintColor;
 				float4 mainColor = tex2D(_MainTexture,IN.uv0);
-				float4 subColor = tex2D(_SecondTexture,IN.uv0);
-				clip(subColor.rgb - _Blend_Amount);				//剔除
-				return mainColor;
+				return fixed4(IN.color,1);
 			}
 
 			ENDCG

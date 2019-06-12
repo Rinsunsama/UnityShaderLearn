@@ -35,9 +35,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SecondTexture:
-        m_Texture: {fileID: 2800000, guid: ae4b95f2ab05cd84c9b465e62cd10be4, type: 3}
+        m_Texture: {fileID: 2800000, guid: 30895b286e60cde47b3e098c449941c7, type: 3}
         m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
+        m_Offset: {x: 1, y: 1}
     m_Floats:
     - _Blend_Amount: 0
     - _Emission: 1

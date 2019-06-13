@@ -1,10 +1,10 @@
-﻿Shader "__MyShader__/NormalExtrusionShader" {
+﻿Shader "__MyShader__/WaveShader" {
 	Properties
 	{
-		_TintColor("Color",Color) = (1,1,1,1)
-		[Header(Color Ramp Sample)]
 		[NoScaleOffset]_MainTexture("MainTexture",2D) = "grey"{}
-		_Extrusion_Amount("Extrusion Amount",Range(-0.1,0.1)) = 0
+		_Speed("Speed",float) = 1.0
+		_Distance("Distance",float) = 1.0
+		_Frequency("Frequency",float) = 1.0
 	}
 	SubShader
 	{
@@ -37,14 +37,17 @@
 				//float3 color: COLOR;
 			};
 
-			float4 _TintColor;
 			sampler2D _MainTexture;
-			float _Extrusion_Amount;
+			float _Speed;
+			float _Distance;
+			float _Frequency;
 
 			v2f vert(appdata IN)
 			{
 				v2f OUT;
-				IN.vertex.xyz += IN.normal*_Extrusion_Amount;
+				float waveTime = _Time.y * _Speed;
+				float waveRipples = IN.vertex.x * _Frequency;
+				IN.vertex.y += sin(waveTime + waveRipples) * _Distance;
 				OUT.vertex = UnityObjectToClipPos(IN.vertex);
 
 				OUT.uv0 = IN.uv0;

@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: cube
-  m_Shader: {fileID: 4800000, guid: 6618dee3e659d2c44a44cdda31bd00b5, type: 3}
+  m_Name: Wave
+  m_Shader: {fileID: 4800000, guid: 76410190bcb063841a6dbc3274842796, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -43,7 +43,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTexture:
-        m_Texture: {fileID: 2800000, guid: ae4b95f2ab05cd84c9b465e62cd10be4, type: 3}
+        m_Texture: {fileID: 2800000, guid: 46e5abad9339a6747b6bf85fd6add905, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -62,8 +62,9 @@ Material:
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
+    - _Distance: 1.9
     - _DstBlend: 0
-    - _Extrusion_Amount: 1
+    - _Frequency: 180
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -73,10 +74,10 @@ Material:
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
+    - _Speed: 2.42
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _TintColor: {r: 1, g: 1, b: 1, a: 1}

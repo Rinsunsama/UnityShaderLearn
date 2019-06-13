@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Creep_Siege_Blue
-  m_Shader: {fileID: 13, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 66e592c8d6c029642890cf05da0dfd74, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -30,7 +30,13 @@ Material:
         m_Texture: {fileID: 2800000, guid: 828ecfe62c2d4224eabb39054e125605, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _MainTexture:
+        m_Texture: {fileID: 2800000, guid: 11334802c38cf704bade2790978921a2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _Disffuse_Amount: 0
+    - _Emission: 1
     - _EmissionLM: 0
     - _Shininess: 0.1376235
     m_Colors:

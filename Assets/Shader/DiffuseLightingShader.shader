@@ -1,16 +1,15 @@
-﻿Shader "__MyShader__/NormalExtrusionShader" {
+﻿Shader "__MyShader__/DiffuseLightingShader" {
 	Properties
 	{
-		_TintColor("Color",Color) = (1,1,1,1)
-		[Header(Color Ramp Sample)]
 		[NoScaleOffset]_MainTexture("MainTexture",2D) = "grey"{}
-		_Extrusion_Amount("Extrusion Amount",Range(-0.1,0.1)) = 0
+		_Disffuse_Amount("Dissfuse Amount",Range(0,1)) = 0
 	}
 	SubShader
 	{
 		Tags
 		{
 			"RenderType" = "Opaque"
+			"LightMode" = "ForwardBase"
 		}
 
 		pass
@@ -21,6 +20,7 @@
 			#pragma fragment frag
 
 			#include "UnityCG.cginc"
+			#include "UnityLightingCOmmon.cginc"
 
 			//step1
 			struct appdata
@@ -34,19 +34,17 @@
 			struct v2f{
 				float4 vertex : SV_POSITION;
 				float2 uv0 : TEXCOORD1;
-				//float3 color: COLOR;
+				float3 normal : NORMAL;
 			};
 
-			float4 _TintColor;
 			sampler2D _MainTexture;
-			float _Extrusion_Amount;
+			float _Disffuse_Amount;
 
 			v2f vert(appdata IN)
 			{
 				v2f OUT;
-				IN.vertex.xyz += IN.normal*_Extrusion_Amount;
 				OUT.vertex = UnityObjectToClipPos(IN.vertex);
-
+				OUT.normal =  UnityObjectToWorldNormal(IN.normal);
 				OUT.uv0 = IN.uv0;
 				//OUT.color = normalize(IN.normal);
 				return OUT;
@@ -55,8 +53,10 @@
 			fixed4 frag(v2f IN) : SV_Target
 			{
 				//return _TintColor;
+				float nDot =  dot(IN.normal,_WorldSpaceLightPos0.xyz)*(1-_Disffuse_Amount) + _Disffuse_Amount;
+				fixed3 disffuseColor = (nDot * _LightColor0);
 				float4 mainColor = tex2D(_MainTexture,IN.uv0);
-				return mainColor;
+				return fixed4(mainColor * disffuseColor,1);
 			}
 
 			ENDCG

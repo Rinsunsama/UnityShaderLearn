@@ -2,6 +2,7 @@
 	Properties
 	{
 		_Color("Color",color) = (1,1,1,1)
+		
 	}
 	SubShader
 	{
@@ -41,12 +42,12 @@
 				return OUT;
 			}
 
-			fixed _Color;
+			fixed4 _Color;
 
 			fixed4 frag(v2f IN) : SV_Target
 			{
 				float invert = 1 - IN.depth;
-				return fixed4(invert,invert,invert,1);
+				return fixed4(invert,invert,invert,1) * _Color;
 			}
 
 			ENDCG

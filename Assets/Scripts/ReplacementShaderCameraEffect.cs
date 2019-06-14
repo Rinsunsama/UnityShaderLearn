@@ -11,7 +11,7 @@ public class ReplacementShaderCameraEffect : MonoBehaviour {
     {
         if (ReplacementShader != null)
         {
-            GetComponent<Camera>().SetReplacementShader(ReplacementShader, "RendType");
+            GetComponent<Camera>().SetReplacementShader(ReplacementShader, "RenderType");
         }
     }
 

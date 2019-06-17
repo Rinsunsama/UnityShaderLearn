@@ -6,12 +6,17 @@ using UnityEngine;
 public class ReplacementShaderCameraEffect : MonoBehaviour {
 
     public Shader ReplacementShader;
+    public Color overDrawColor;
+    void OnValidate()
+    {
+        Shader.SetGlobalColor("_OverDraw", overDrawColor);
+    }
 
     private void OnEnable()
     {
         if (ReplacementShader != null)
         {
-            GetComponent<Camera>().SetReplacementShader(ReplacementShader, "RenderType");
+            GetComponent<Camera>().SetReplacementShader(ReplacementShader, "");
         }
     }
 
